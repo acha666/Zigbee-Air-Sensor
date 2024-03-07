@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "Zigbee-Air-Sensor")(type "KiCad")(uri "${KIPRJMOD}/Zigbee-Air-Sensor.kicad_sym")(options "")(descr ""))
+)

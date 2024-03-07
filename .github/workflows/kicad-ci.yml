@@ -1,0 +1,246 @@
+name: KiCad PCB CI
+
+on: [push]
+
+env:
+  PROJECT_NAME: Zigbee-Air-Sensor
+
+jobs:
+  drc-check:
+    runs-on: ubuntu-latest
+    outputs:
+      proceed: ${{ steps.drc-results.outputs.proceed }}
+    container:
+      image: kicad/kicad:8.0.0
+      options: --user root
+
+    steps:
+      - name: Install jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+
+      - name: Checkout Repository
+        uses: actions/checkout@master
+      
+      - name: Set short SHA
+        id: short-sha
+        run: echo "SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_OUTPUT
+
+      - name: Replace Library Tables
+        run: |
+          rm ./fp-lib-table
+          rm ./sym-lib-table
+          cp .github/workflows/kicad-conf/gh-fp-lib-table ./fp-lib-table
+          cp .github/workflows/kicad-conf/gh-sym-lib-table ./sym-lib-table
+
+      - name: Create Output Directories
+        run: mkdir -p outputs/drc
+
+      - name: Run DRC and Capture Output
+        id: drc
+        run: |
+          OUTPUT=$(kicad-cli pcb drc -o "outputs/drc/${{ env.PROJECT_NAME }}-drc-report-all.json" --format json --schematic-parity --severity-all -D BRANCH_HASH=${GITHUB_REF#refs/heads/}-${{ steps.short-sha.outputs.SHORT_SHA }} ./${{ env.PROJECT_NAME }}.kicad_pcb)
+          echo "$OUTPUT"
+          SINGLE_LINE_OUTPUT=$(echo "$OUTPUT" | tr '\n' ',')
+          echo "DRC_OUTPUT_ALL=$SINGLE_LINE_OUTPUT" >> $GITHUB_OUTPUT
+
+          OUTPUT=$(kicad-cli pcb drc -o "outputs/drc/${{ env.PROJECT_NAME }}-drc-report-error.json" --format json --schematic-parity --severity-error -D BRANCH_HASH=${GITHUB_REF#refs/heads/}-${{ steps.short-sha.outputs.SHORT_SHA }} ./${{ env.PROJECT_NAME }}.kicad_pcb)
+          echo "$OUTPUT"
+          SINGLE_LINE_OUTPUT=$(echo "$OUTPUT" | tr '\n' ',')
+          echo "DRC_OUTPUT_ERROR=$SINGLE_LINE_OUTPUT" >> $GITHUB_OUTPUT
+
+          OUTPUT=$(kicad-cli pcb drc -o "outputs/drc/${{ env.PROJECT_NAME }}-drc-report-warning.json" --format json --schematic-parity --severity-warning -D BRANCH_HASH=${GITHUB_REF#refs/heads/}-${{ steps.short-sha.outputs.SHORT_SHA }} ./${{ env.PROJECT_NAME }}.kicad_pcb)
+          echo "$OUTPUT"
+          SINGLE_LINE_OUTPUT=$(echo "$OUTPUT" | tr '\n' ',')
+          echo "DRC_OUTPUT_WARNING=$SINGLE_LINE_OUTPUT" >> $GITHUB_OUTPUT
+
+          OUTPUT=$(kicad-cli pcb drc -o "outputs/drc/${{ env.PROJECT_NAME }}-drc-report-exclusions.json" --format json --schematic-parity --severity-exclusions -D BRANCH_HASH=${GITHUB_REF#refs/heads/}-${{ steps.short-sha.outputs.SHORT_SHA }} ./${{ env.PROJECT_NAME }}.kicad_pcb)
+          echo "$OUTPUT"
+          SINGLE_LINE_OUTPUT=$(echo "$OUTPUT" | tr '\n' ',')
+          echo "DRC_OUTPUT_EXCLUSIONS=$SINGLE_LINE_OUTPUT" >> $GITHUB_OUTPUT
+
+      - name: Analyze DRC Results and Decide Next Steps
+        id: drc-results
+        run: |
+          output="${{ steps.drc.outputs.DRC_OUTPUT_ERROR }}"
+          violations=$(echo $output | grep -oP 'Found \K[0-9]+(?= violations)')
+          unconnected_items=$(echo $output | grep -oP 'Found \K[0-9]+(?= unconnected items)')
+          schematic_issues=$(echo "$output" | grep -oP 'Found \K[0-9]+(?= schematic parity issues)')
+          echo "Violations: $violations"
+          echo "Unconnected Items: $unconnected_items"
+          echo "Schematic Parity Issues: $schematic_issues"
+          if [ "$violations" -ne 0 ] || [ "$unconnected_items" -ne 0 ] || [ "$schematic_issues" -ne 0 ]; then
+            echo "PROCEED=false" >> $GITHUB_OUTPUT
+            echo "Errors found, stopping the workflow."
+          else
+            echo "PROCEED=true" >> $GITHUB_OUTPUT
+            echo "No errors found, proceeding with the workflow."
+          fi
+
+      - name: Parse DRC Report and Create Warnings
+        run: |
+          jq -c '.violations[]' "outputs/drc/${{ env.PROJECT_NAME }}-drc-report-all.json" | while read -r violation; do
+            description=$(echo $violation | jq -r '.description')
+            items=$(echo $violation | jq -r '.items[] | .description')
+            echo "::warning ::$description - $items"
+          done
+
+      - name: Upload DRC Reports
+        uses: actions/upload-artifact@master
+        with:
+          name: drc-reports-${{ steps.short-sha.outputs.SHORT_SHA }}
+          path: ./outputs/drc
+
+  export-files:
+    needs: drc-check
+    if: needs.drc-check.outputs.PROCEED == 'true'
+    runs-on: ubuntu-latest
+    container:
+      image: kicad/kicad:8.0.0
+      options: --user root
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+
+      - name: Set short SHA
+        id: short-sha
+        run: echo "SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_OUTPUT
+
+      - name: Set timezone to Asia/Shanghai
+        run: |
+          sudo ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+          sudo echo "Asia/Shanghai" > /etc/timezone
+
+      - name: Replace Library Tables
+        run: |
+          rm ./fp-lib-table
+          rm ./sym-lib-table
+          cp .github/workflows/kicad-conf/gh-fp-lib-table ./fp-lib-table
+          cp .github/workflows/kicad-conf/gh-sym-lib-table ./sym-lib-table
+
+      - name: Create Output Directories
+        run: |
+          mkdir -p outputs/gerber
+          mkdir -p outputs/pnp
+          mkdir -p outputs/step
+          mkdir -p outputs/vrml
+          mkdir -p outputs/bom
+          mkdir -p outputs/netlist
+          mkdir -p outputs/schematic
+
+      - name: Export Gerber and Drill Files
+        run: |
+          kicad-cli pcb export gerbers -o "outputs/gerber/" --board-plot-params -D BRANCH_HASH=${GITHUB_REF#refs/heads/}-${{ steps.short-sha.outputs.SHORT_SHA }} ./${{ env.PROJECT_NAME }}.kicad_pcb
+          kicad-cli pcb export drill -o "outputs/gerber/" --format gerber --generate-map ./${{ env.PROJECT_NAME }}.kicad_pcb
+
+      - name: Export Position Files
+        run: |
+          kicad-cli pcb export pos -o "outputs/pnp/${{ env.PROJECT_NAME }}-top-pos.csv" --side front --format csv --units mm --exclude-dnp ./${{ env.PROJECT_NAME }}.kicad_pcb
+          kicad-cli pcb export pos -o "outputs/pnp/${{ env.PROJECT_NAME }}-bottom-pos.csv" --side back --format csv --units mm --exclude-dnp ./${{ env.PROJECT_NAME }}.kicad_pcb
+
+      - name: Export STEP Models
+        run: kicad-cli pcb export step -o "outputs/step/${{ env.PROJECT_NAME }}.step" --no-dnp --subst-models --include-tracks --include-zones -D BRANCH_HASH=${GITHUB_REF#refs/heads/}-${{ steps.short-sha.outputs.SHORT_SHA }} ./${{ env.PROJECT_NAME }}.kicad_pcb
+
+      - name: Export VRML Models
+        run: kicad-cli pcb export vrml -o "outputs/vrml/${{ env.PROJECT_NAME }}.wrl" --units mm --models-dir "${{ env.PROJECT_NAME }}.wrl.modules" --models-relative -D BRANCH_HASH=${GITHUB_REF#refs/heads/}-${{ steps.short-sha.outputs.SHORT_SHA }} ./${{ env.PROJECT_NAME }}.kicad_pcb
+
+      - name: Export BOM
+        run: kicad-cli sch export bom -o "outputs/bom/${{ env.PROJECT_NAME }}-bom.csv" --format-preset CSV --group-by 'Value,Footprint,${DNP}' ./${{ env.PROJECT_NAME }}.kicad_sch
+
+      - name: Export Netlists
+        run: |
+          kicad-cli sch export netlist -o "outputs/netlist/${{ env.PROJECT_NAME }}.kicadsexpr.net" --format kicadsexpr ./${{ env.PROJECT_NAME }}.kicad_sch
+          kicad-cli sch export netlist -o "outputs/netlist/${{ env.PROJECT_NAME }}.kicadxml.net" --format kicadxml ./${{ env.PROJECT_NAME }}.kicad_sch
+          kicad-cli sch export netlist -o "outputs/netlist/${{ env.PROJECT_NAME }}.cadstar.net" --format cadstar ./${{ env.PROJECT_NAME }}.kicad_sch
+          kicad-cli sch export netlist -o "outputs/netlist/${{ env.PROJECT_NAME }}.orcadpcb2.net" --format orcadpcb2 ./${{ env.PROJECT_NAME }}.kicad_sch
+          kicad-cli sch export netlist -o "outputs/netlist/${{ env.PROJECT_NAME }}.spice.net" --format spice ./${{ env.PROJECT_NAME }}.kicad_sch
+          kicad-cli sch export netlist -o "outputs/netlist/${{ env.PROJECT_NAME }}.spicemodel.net" --format spicemodel ./${{ env.PROJECT_NAME }}.kicad_sch
+
+      - name: Export Schematic PDF
+        run: kicad-cli sch export pdf -o "outputs/schematic/${{ env.PROJECT_NAME }}-schematic.pdf" -n ./${{ env.PROJECT_NAME }}.kicad_sch
+
+      - name: Upload Gerber Files
+        uses: actions/upload-artifact@master
+        with:
+          name: gerber-${{ steps.short-sha.outputs.SHORT_SHA }}
+          path: ./outputs/gerber
+
+      - name: Upload Position
+        uses: actions/upload-artifact@master
+        with:
+          name: position-${{ steps.short-sha.outputs.SHORT_SHA }}
+          path: ./outputs/pnp
+
+      - name: Upload STEP Models
+        uses: actions/upload-artifact@master
+        with:
+          name: step-models-${{ steps.short-sha.outputs.SHORT_SHA }}
+          path: ./outputs/step
+
+      - name: Upload VRML Models
+        uses: actions/upload-artifact@master
+        with:
+          name: vrml-models-${{ steps.short-sha.outputs.SHORT_SHA }}
+          path: ./outputs/vrml
+
+      - name: Upload BOM
+        uses: actions/upload-artifact@master
+        with:
+          name: bom-${{ steps.short-sha.outputs.SHORT_SHA }}
+          path: ./outputs/bom
+
+      - name: Upload Netlist
+        uses: actions/upload-artifact@master
+        with:
+          name: netlist-${{ steps.short-sha.outputs.SHORT_SHA }}
+          path: ./outputs/netlist
+
+      - name: Upload Schematic PDF
+        uses: actions/upload-artifact@master
+        with:
+          name: schematic-${{ steps.short-sha.outputs.SHORT_SHA }}
+          path: ./outputs/schematic
+
+  generate-jlc-gerber:
+    needs:
+      - export-files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@master
+        with:
+          python-version: "3.x"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Checkout Repository
+        uses: actions/checkout@master
+
+      - name: Set short SHA
+        id: short-sha
+        run: echo "SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_OUTPUT
+
+      - name: Download Original Gerber Files
+        uses: actions/download-artifact@master
+        with:
+          name: gerber-${{ steps.short-sha.outputs.SHORT_SHA }}
+          path: original-gerber
+
+      - name: Create Output Directories
+        run: |
+          mkdir -p jlc-gerber
+
+      - name: Process Gerber for JLCPCB
+        run: python .github/workflows/FuckJLC/modify.py -i $(pwd)/original-gerber -o $(pwd)/jlc-gerber
+
+      - name: Upload JLC Gerber Files
+        uses: actions/upload-artifact@master
+        with:
+          name: jlc-gerber-${{ steps.short-sha.outputs.SHORT_SHA }}
+          path: ./jlc-gerber
