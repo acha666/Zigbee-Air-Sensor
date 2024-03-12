@@ -1,0 +1,87 @@
+(footprint "MountingHole_1.1mm_M1_Pad"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(descr "Mounting Hole 1.1mm, M1")
+	(tags "mounting hole 1.1mm m1")
+	(property "Reference" "REF**"
+		(at 0 -2.75 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "24443fc9-34f1-407f-8785-cd888cf9f636")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "MountingHole_1.1mm_M1_Pad"
+		(at 0 2.75 0)
+		(layer "F.Fab")
+		(uuid "e8a52f8d-4988-487f-aa37-794038c0cdce")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "08456190-1c87-459a-8ef8-b66dd2e70740")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "22c464f1-6ab7-4453-8426-675e13516d65")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "f9ebfd59-b640-41e7-9847-360539ceaee4")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(attr board_only exclude_from_pos_files exclude_from_bom)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "58066f54-d315-45c0-a866-32d0a8d13c93")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at 0 0)
+		(size 1.9 1.9)
+		(drill 1.1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "918f7b43-a716-4836-a785-e27070288d67")
+	)
+)
