@@ -101,6 +101,11 @@ jobs:
       options: --user root
 
     steps:
+      - name: Install protobuf-compiler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y protobuf-compiler
+
       - name: Checkout Repository
         uses: actions/checkout@master
 
