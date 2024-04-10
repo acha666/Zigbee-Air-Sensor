@@ -2679,16 +2679,6 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 69.85) (xy 33.02 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "976665ba-d5f3-4594-8a50-ac9d36f0ee90")
-	)
-	(wire
-		(pts
 			(xy 149.86 66.04) (xy 149.86 63.5)
 		)
 		(stroke
@@ -2796,6 +2786,16 @@
 			(type default)
 		)
 		(uuid "b4ffa601-1fdc-4ef0-9a55-385499fd5556")
+	)
+	(wire
+		(pts
+			(xy 22.86 69.85) (xy 27.94 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b6e97116-857e-4dc7-898d-ebaea1aaab21")
 	)
 	(wire
 		(pts
@@ -3088,6 +3088,17 @@
 		)
 		(uuid "044342a6-569e-4251-b875-adb8fa652932")
 	)
+	(label "RES"
+		(at 22.86 69.85 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "216ae0f7-f726-4ae8-ad84-52bd59aac374")
+	)
 	(label "DC"
 		(at 142.24 53.34 0)
 		(fields_autoplaced yes)
@@ -3241,17 +3252,6 @@
 			(justify left bottom)
 		)
 		(uuid "88d95d87-e759-4fcb-8257-ca45968533b6")
-	)
-	(label "RES"
-		(at 27.94 69.85 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "933201b4-9fdf-4747-bcca-7ac50e0c456d")
 	)
 	(label "MOSI"
 		(at 22.86 124.46 0)
@@ -4165,6 +4165,74 @@
 			(project "Zigbee-Air-Sensor"
 				(path "/dfb674f4-f198-4fab-a4f1-5288b41edc56/e6270a9f-6dcc-4cda-84dd-a48da63fe64e"
 					(reference "#PWR053")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_Small")
+		(at 30.48 69.85 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "59b0b450-c16f-4847-8587-6f0b3c3a66d8")
+		(property "Reference" "R24"
+			(at 30.48 64.77 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10K"
+			(at 30.48 67.31 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 30.48 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 30.48 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, small symbol"
+			(at 30.48 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a230801a-bacf-4b79-89f9-a3fd6c275a92")
+		)
+		(pin "2"
+			(uuid "c74c744c-2e10-46ba-bb02-42f931efb63a")
+		)
+		(instances
+			(project "Zigbee-Air-Sensor"
+				(path "/dfb674f4-f198-4fab-a4f1-5288b41edc56/e6270a9f-6dcc-4cda-84dd-a48da63fe64e"
+					(reference "R24")
 					(unit 1)
 				)
 			)

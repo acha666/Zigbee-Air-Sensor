@@ -11,7 +11,7 @@ jobs:
     outputs:
       proceed: ${{ steps.drc-results.outputs.proceed }}
     container:
-      image: kicad/kicad:8.0.0
+      image: kicad/kicad:nightly
       options: --user root
 
     steps:
@@ -97,7 +97,7 @@ jobs:
     if: needs.drc-check.outputs.PROCEED == 'true'
     runs-on: ubuntu-latest
     container:
-      image: kicad/kicad:8.0.0
+      image: kicad/kicad:nightly
       options: --user root
 
     steps:

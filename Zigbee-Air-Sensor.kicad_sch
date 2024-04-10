@@ -11,6 +11,108 @@
 		(company "Acha")
 	)
 	(lib_symbols
+		(symbol "Connector:TestPoint"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0.762) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "TP"
+				(at 0 6.858 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "test point"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "test point tp"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Pin* Test*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "TestPoint_0_1"
+				(circle
+					(center 0 3.302)
+					(radius 0.762)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TestPoint_1_1"
+				(pin passive line
+					(at 0 0 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Connector:USB_C_Receptacle_PowerOnly_6P"
 			(pin_names
 				(offset 1.016)
@@ -1722,6 +1824,12 @@
 		(uuid "006bc410-b845-4ed8-97c5-4667628b25c3")
 	)
 	(junction
+		(at 209.55 133.35)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0074f23a-24c7-453a-bd45-9dec4f5100f0")
+	)
+	(junction
 		(at 40.64 118.11)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1818,10 +1926,28 @@
 		(uuid "ca6297cd-e5d4-40bd-8671-e8f80f743c74")
 	)
 	(junction
+		(at 144.78 92.71)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "cca9d17b-b7e4-4c6f-9cf8-efd93799c2a4")
+	)
+	(junction
+		(at 204.47 130.81)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d2347a35-4735-4a74-bcbf-ba5a9f5909a0")
+	)
+	(junction
 		(at 109.22 90.17)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d943b784-ab07-496c-b8d2-173b19e413e1")
+	)
+	(junction
+		(at 139.7 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f3cb2e79-bf52-4701-a01f-4a11fe700335")
 	)
 	(junction
 		(at 198.12 127)
@@ -2123,6 +2249,16 @@
 	)
 	(wire
 		(pts
+			(xy 139.7 85.09) (xy 139.7 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5592a377-0a53-49ee-8722-13db4cd942a8")
+	)
+	(wire
+		(pts
 			(xy 200.66 104.14) (xy 200.66 119.38)
 		)
 		(stroke
@@ -2303,7 +2439,7 @@
 	)
 	(wire
 		(pts
-			(xy 124.46 90.17) (xy 152.4 90.17)
+			(xy 124.46 90.17) (xy 139.7 90.17)
 		)
 		(stroke
 			(width 0)
@@ -2333,7 +2469,7 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 133.35) (xy 198.12 133.35)
+			(xy 219.71 133.35) (xy 209.55 133.35)
 		)
 		(stroke
 			(width 0)
@@ -2350,6 +2486,16 @@
 			(type default)
 		)
 		(uuid "7fa11af9-70bd-43ba-b110-226c0444953c")
+	)
+	(wire
+		(pts
+			(xy 204.47 130.81) (xy 219.71 130.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "82c1b047-4b88-4532-af40-0697896abd1e")
 	)
 	(wire
 		(pts
@@ -2390,6 +2536,16 @@
 			(type default)
 		)
 		(uuid "8efd6585-c6f0-4248-b05b-f1387703e99b")
+	)
+	(wire
+		(pts
+			(xy 209.55 127) (xy 209.55 133.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8f85ab0e-3cf5-4522-87f1-d11bbbc0455d")
 	)
 	(wire
 		(pts
@@ -2453,7 +2609,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 92.71) (xy 152.4 92.71)
+			(xy 132.08 92.71) (xy 144.78 92.71)
 		)
 		(stroke
 			(width 0)
@@ -2533,7 +2689,7 @@
 	)
 	(wire
 		(pts
-			(xy 200.66 130.81) (xy 219.71 130.81)
+			(xy 200.66 130.81) (xy 204.47 130.81)
 		)
 		(stroke
 			(width 0)
@@ -2573,6 +2729,16 @@
 	)
 	(wire
 		(pts
+			(xy 204.47 127) (xy 204.47 130.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c697de53-e111-4d18-bf4e-77e3b462c069")
+	)
+	(wire
+		(pts
 			(xy 72.39 118.11) (xy 72.39 114.3)
 		)
 		(stroke
@@ -2590,6 +2756,16 @@
 			(type default)
 		)
 		(uuid "c76dd5a4-828d-449d-83fe-ed980cc24a66")
+	)
+	(wire
+		(pts
+			(xy 139.7 90.17) (xy 152.4 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c9334277-3b86-4bc9-9dc5-d43feffb436d")
 	)
 	(wire
 		(pts
@@ -2620,6 +2796,16 @@
 			(type default)
 		)
 		(uuid "cf75adea-2e2f-4974-ba18-873e1e354fc8")
+	)
+	(wire
+		(pts
+			(xy 144.78 92.71) (xy 152.4 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dd3ba87a-e902-4ae2-b1b5-1bbc61e4aaf3")
 	)
 	(wire
 		(pts
@@ -2713,6 +2899,16 @@
 	)
 	(wire
 		(pts
+			(xy 209.55 133.35) (xy 198.12 133.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fc6bde8d-5dab-448f-86c7-9156e6f4c912")
+	)
+	(wire
+		(pts
 			(xy 101.6 63.5) (xy 104.14 63.5)
 		)
 		(stroke
@@ -2720,6 +2916,16 @@
 			(type default)
 		)
 		(uuid "fd0e6b29-652f-4a56-82e2-209466534478")
+	)
+	(wire
+		(pts
+			(xy 144.78 85.09) (xy 144.78 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fe3c5652-4b56-4e98-a076-04c3507a291d")
 	)
 	(wire
 		(pts
@@ -3082,6 +3288,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 139.7 85.09 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "176a59c7-8cc5-4822-bbb4-2486673235b7")
+		(property "Reference" "TP1"
+			(at 137.922 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 142.24 83.0579 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Zigbee-Air-Sensor:TestPoint_Pad_D0.6mm"
+			(at 144.78 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 144.78 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 139.7 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4f8fff35-e0ad-4228-96e0-6b178bac3d32")
+		)
+		(instances
+			(project "Zigbee-Air-Sensor"
+				(path "/dfb674f4-f198-4fab-a4f1-5288b41edc56"
+					(reference "TP1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "LED:WS2812B-2020")
 		(at 95.25 147.32 0)
 		(mirror y)
@@ -3152,6 +3425,73 @@
 			(project "Zigbee-Air-Sensor"
 				(path "/dfb674f4-f198-4fab-a4f1-5288b41edc56"
 					(reference "D1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 204.47 127 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "28c58ce6-6382-4419-929d-d42837f3ef44")
+		(property "Reference" "TP3"
+			(at 202.692 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 207.01 124.9679 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Zigbee-Air-Sensor:TestPoint_Pad_D0.6mm"
+			(at 209.55 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 209.55 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 204.47 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f2c8fb40-9c07-450b-af5d-e0a5818698af")
+		)
+		(instances
+			(project "Zigbee-Air-Sensor"
+				(path "/dfb674f4-f198-4fab-a4f1-5288b41edc56"
+					(reference "TP3")
 					(unit 1)
 				)
 			)
@@ -3420,6 +3760,73 @@
 			(project "Zigbee-Air-Sensor"
 				(path "/dfb674f4-f198-4fab-a4f1-5288b41edc56"
 					(reference "#PWR02")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 144.78 85.09 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "65e36091-8de4-4693-ac2c-baae32980dc9")
+		(property "Reference" "TP2"
+			(at 143.002 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 147.32 83.0579 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Zigbee-Air-Sensor:TestPoint_Pad_D0.6mm"
+			(at 149.86 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 149.86 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 144.78 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e4df9606-1be7-4094-95b6-7f7361626a93")
+		)
+		(instances
+			(project "Zigbee-Air-Sensor"
+				(path "/dfb674f4-f198-4fab-a4f1-5288b41edc56"
+					(reference "TP2")
 					(unit 1)
 				)
 			)
@@ -4736,6 +5143,73 @@
 			(project "Zigbee-Air-Sensor"
 				(path "/dfb674f4-f198-4fab-a4f1-5288b41edc56"
 					(reference "C2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 209.55 127 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fd403f8c-2f4d-49f1-b9aa-18d3115c8dad")
+		(property "Reference" "TP4"
+			(at 207.772 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 212.09 124.9679 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Zigbee-Air-Sensor:TestPoint_Pad_D0.6mm"
+			(at 214.63 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 214.63 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 209.55 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a854549f-be9a-4b57-a744-002e0884f7ca")
+		)
+		(instances
+			(project "Zigbee-Air-Sensor"
+				(path "/dfb674f4-f198-4fab-a4f1-5288b41edc56"
+					(reference "TP4")
 					(unit 1)
 				)
 			)
