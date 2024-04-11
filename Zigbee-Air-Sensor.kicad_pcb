@@ -142,7 +142,6 @@
 			(outputdirectory "Zigbee-Air-Sensor.outputs/gerber/")
 		)
 	)
-	(property "BRANCH_HASH" "null")
 	(net 0 "")
 	(net 1 "GND")
 	(net 2 "/BQ25628E/VBUS")

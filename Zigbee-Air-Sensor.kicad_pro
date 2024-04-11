@@ -636,7 +636,5 @@
       "Sensors"
     ]
   ],
-  "text_variables": {
-    "BRANCH_HASH": "null"
-  }
+  "text_variables": {}
 }
