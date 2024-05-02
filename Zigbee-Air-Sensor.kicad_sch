@@ -1842,12 +1842,6 @@
 		(uuid "23999478-3114-4c0b-9bb2-6166a51160e4")
 	)
 	(junction
-		(at 198.12 101.6)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "28bff6b0-36f3-47f2-b525-2c835d5e2a6b")
-	)
-	(junction
 		(at 218.44 99.06)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1884,6 +1878,12 @@
 		(uuid "799bf807-896f-4109-afe1-668b7e0f8984")
 	)
 	(junction
+		(at 198.12 101.6)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "80e985fc-6a74-4172-88ff-92bf5b32b587")
+	)
+	(junction
 		(at 200.66 119.38)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1894,12 +1894,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a28087f9-6861-4e4a-b779-de8d14667f40")
-	)
-	(junction
-		(at 200.66 104.14)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a7b4324c-74ae-4beb-b945-9c81282b858b")
 	)
 	(junction
 		(at 128.27 78.74)
@@ -1936,6 +1930,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d2347a35-4735-4a74-bcbf-ba5a9f5909a0")
+	)
+	(junction
+		(at 200.66 104.14)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d30b6cce-f28d-45b2-a488-d0c9f02d356e")
 	)
 	(junction
 		(at 109.22 90.17)
@@ -2079,6 +2079,16 @@
 	)
 	(wire
 		(pts
+			(xy 181.61 85.09) (xy 218.44 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "19728bf2-2b35-4333-94f9-e9b042713679")
+	)
+	(wire
+		(pts
 			(xy 101.6 52.07) (xy 111.76 52.07)
 		)
 		(stroke
@@ -2106,16 +2116,6 @@
 			(type default)
 		)
 		(uuid "1edcbbe3-7edd-4237-b463-21312f512727")
-	)
-	(wire
-		(pts
-			(xy 181.61 101.6) (xy 198.12 101.6)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "20074c3f-10a9-4b62-a94d-2677a4573805")
 	)
 	(wire
 		(pts
@@ -2156,6 +2156,16 @@
 			(type default)
 		)
 		(uuid "30264caa-e47d-4857-99aa-acaa9558ee7d")
+	)
+	(wire
+		(pts
+			(xy 181.61 82.55) (xy 218.44 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "31294b95-b86b-4176-a41e-f52c04dc7740")
 	)
 	(wire
 		(pts
@@ -2309,16 +2319,6 @@
 	)
 	(wire
 		(pts
-			(xy 181.61 104.14) (xy 200.66 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5a6d2383-935a-40e0-9e93-5684c84c06b9")
-	)
-	(wire
-		(pts
 			(xy 101.6 57.15) (xy 114.3 57.15)
 		)
 		(stroke
@@ -2409,6 +2409,16 @@
 	)
 	(wire
 		(pts
+			(xy 181.61 104.14) (xy 200.66 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6fd5ce95-007e-4ff3-bbba-71c5d888806e")
+	)
+	(wire
+		(pts
 			(xy 102.87 147.32) (xy 114.3 147.32)
 		)
 		(stroke
@@ -2469,6 +2479,16 @@
 	)
 	(wire
 		(pts
+			(xy 181.61 101.6) (xy 198.12 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7b1fd3b9-9a2f-4d4a-b7ad-a1399cfa01fb")
+	)
+	(wire
+		(pts
 			(xy 219.71 133.35) (xy 209.55 133.35)
 		)
 		(stroke
@@ -2516,16 +2536,6 @@
 			(type default)
 		)
 		(uuid "839aa477-81ea-4f6e-b3aa-8acb61e1adb8")
-	)
-	(wire
-		(pts
-			(xy 181.61 85.09) (xy 218.44 85.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8e58a091-a240-4792-9073-d203c2bcb7de")
 	)
 	(wire
 		(pts
@@ -2586,16 +2596,6 @@
 			(type default)
 		)
 		(uuid "9b6c030b-7291-4ae3-94d5-b037c49c47f9")
-	)
-	(wire
-		(pts
-			(xy 181.61 82.55) (xy 218.44 82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a57580f6-7984-4692-9b1a-004e92877211")
 	)
 	(wire
 		(pts
@@ -2970,18 +2970,7 @@
 		)
 		(uuid "ae76494a-d46b-43c8-8322-2b8348086211")
 	)
-	(label "CS2"
-		(at 187.96 85.09 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "05ad68ef-35f3-457c-a66d-a4cb03269f85")
-	)
-	(label "MISO"
+	(label "MISO{slash}USBD+"
 		(at 187.96 82.55 0)
 		(fields_autoplaced yes)
 		(effects
@@ -2990,7 +2979,18 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "52c7a8ce-2ff2-427b-84e8-a4a50b76dea8")
+		(uuid "9a62a35c-5af8-4e29-b379-59a8b0d07111")
+	)
+	(label "CS2{slash}USBD-"
+		(at 187.96 85.09 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d0cf58dc-f1f4-4fb2-90e8-fbf5b750b9ca")
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -5759,28 +5759,8 @@
 			)
 			(uuid "6b0fc959-5b6e-4758-a7d9-be5d88f4e08d")
 		)
-		(pin "IO25" output
-			(at 181.61 85.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-			(uuid "808a302e-306a-445e-99a7-ce70e88fd463")
-		)
-		(pin "IO22" output
-			(at 181.61 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-			(uuid "203f6c56-ba55-4caf-b7e5-5b8e70ae7b5b")
-		)
 		(pin "IO26" output
-			(at 181.61 104.14 0)
+			(at 181.61 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5790,7 +5770,7 @@
 			(uuid "31affe6c-6bea-4831-96cf-626488c03f37")
 		)
 		(pin "IO27" output
-			(at 181.61 101.6 0)
+			(at 181.61 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5838,6 +5818,26 @@
 				(justify left)
 			)
 			(uuid "1a702f21-8846-43b5-96bc-036900378658")
+		)
+		(pin "IO22" output
+			(at 181.61 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "de32ba7d-250c-44f6-9dc8-1d52c19ad829")
+		)
+		(pin "IO25" output
+			(at 181.61 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "88918516-0055-4edf-8b62-0bda7ac1eb4a")
 		)
 		(instances
 			(project "Zigbee-Air-Sensor"
