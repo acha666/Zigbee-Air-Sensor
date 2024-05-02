@@ -151,8 +151,8 @@ jobs:
       - name: Export VRML Models
         run: kicad-cli pcb export vrml -o "outputs/vrml/${{ env.PROJECT_NAME }}.wrl" --units mm --models-dir "${{ env.PROJECT_NAME }}.wrl.modules" --models-relative -D BRANCH_HASH=${GITHUB_REF#refs/heads/}-${{ steps.short-sha.outputs.SHORT_SHA }} ./${{ env.PROJECT_NAME }}.kicad_pcb
 
-      - name: Export BOM
-        run: kicad-cli sch export bom -o "outputs/bom/${{ env.PROJECT_NAME }}-bom.csv" --format-preset CSV --group-by 'Value,Footprint,${DNP}' ./${{ env.PROJECT_NAME }}.kicad_sch
+      # - name: Export BOM
+        # run: kicad-cli sch export bom -o "outputs/bom/${{ env.PROJECT_NAME }}-bom.csv" --format-preset CSV --group-by 'Value,Footprint,${DNP}' ./${{ env.PROJECT_NAME }}.kicad_sch
 
       - name: Export Netlists
         run: |
@@ -190,11 +190,11 @@ jobs:
           name: vrml-models-${{ steps.short-sha.outputs.SHORT_SHA }}
           path: ./outputs/vrml
 
-      - name: Upload BOM
-        uses: actions/upload-artifact@master
-        with:
-          name: bom-${{ steps.short-sha.outputs.SHORT_SHA }}
-          path: ./outputs/bom
+      # - name: Upload BOM
+      #   uses: actions/upload-artifact@master
+      #   with:
+      #     name: bom-${{ steps.short-sha.outputs.SHORT_SHA }}
+      #     path: ./outputs/bom
 
       - name: Upload Netlist
         uses: actions/upload-artifact@master
