@@ -1,6 +1,9 @@
 name: KiCad PCB CI
 
-on: [push]
+on: 
+  push:
+    branches:
+      - master
 
 env:
   PROJECT_NAME: Zigbee-Air-Sensor
